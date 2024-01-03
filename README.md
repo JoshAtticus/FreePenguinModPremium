@@ -1,2 +1,2 @@
-# PenguinMod-Home
-A main home page with community projects and other content.
+# Free PenguinMod Premium
+A lesson to not click sketchy links
