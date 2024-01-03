@@ -46,17 +46,6 @@
     };
 
     let thingyActive = false;
-    // do the thingy
-    $: {
-        if (!loggedIn) {
-            // 1:99 chance that we will play the video
-            // imediatly rather then after four hours
-            thingyActive = Math.random() * 100 <= 1;
-            setTimeout(() => {
-                thingyActive = true;
-            }, 1.44e7);
-        } else console.log("you dont get to see the thingy :trol:");
-    }
 
     const getAndUpdateMyFeed = async () => {
         const feed = await ProjectClient.getMyFeed();
@@ -223,10 +212,10 @@
 </script>
 
 <svelte:head>
-    <title>PenguinMod - Home</title>
-    <meta name="title" content="PenguinMod - Home" />
-    <meta property="og:title" content="PenguinMod - Home" />
-    <meta property="twitter:title" content="PenguinMod - Home">
+    <title>PenguinMod - You Won!</title>
+    <meta name="title" content="PenguinMod - You Won!" />
+    <meta property="og:title" content="PenguinMod - You Won!" />
+    <meta property="twitter:title" content="PenguinMod - You Won!">
     <meta name="description" content="The area where featured projects and community stuff & info is shown.">
     <meta property="twitter:description" content="The area where featured projects and community stuff & info is shown.">
     <meta property="og:url" content="https://penguinmod.com/">
@@ -240,15 +229,15 @@
 
     <Alert
         onlyShowID={"donatee:_2"}
-        text={"PenguinMod is a free-to-use visual coding website. Your support can help us keep the website working!"}
+        text={"PenguinMod Premium has just been added! We are giving it away to a lucky few users!"}
         textBreakup={true}
         textColor={"white"}
         hasImage={true}
         imgSrc={"/happy.svg"}
         imgAlt={":D"}
         hasButton={true}
-        buttonText={"Donate"}
-        buttonHref={"/donate"}
+        buttonText={"Join Giveaway"}
+        buttonHref={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
     />
     <!-- TODO: re-add this, but only have it appear for new users after they login on a date before the alert -->
     <!-- <Alert
@@ -268,32 +257,18 @@
         <div class="section-info">
             <div style="margin-left: 8rem;">
                 <h1>
-                    <LocalizedText
-                        text="Block-based coding with tons of capabilities"
-                        key="home.introduction1"
-                        lang={currentLang}
-                    />
+                    Congrats! You won PenguinMod Premium!
                 </h1>
-                <h1>
-                    <LocalizedText
-                        text="Built off of TurboWarp and Scratch"
-                        key="home.introduction2"
-                        lang={currentLang}
-                    />
-                </h1>
+                <p>Only <b>37</b> subscriptions available! Redeem quickly!</p>
                 <Button
                     label="<img src='/tryit.svg' width='32px' style='margin-right:8px'></img>"
                     highlighted="true"
-                    link={LINK.editor}
+                    link={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
                 >
                     {#if !thingyActive}
-                        <LocalizedText
-                            text="Try it out"
-                            key="home.tryout"
-                            lang={currentLang}
-                        />
+                        Redeem Premium!
                     {:else}
-                        EEEAAAOOO
+                        Redeem Premium!
                     {/if}
                 </Button>
             </div>
@@ -339,38 +314,6 @@
                 </p>
             </div>
         {/if}
-
-        <div class="section-links">
-            <Button link={LINK.packager}>
-                <LocalizedText
-                    text="Packager"
-                    key="home.footer.sections.website.packager"
-                    lang={currentLang}
-                />
-            </Button>
-            <Button link={LINK.credits}>
-                <LocalizedText
-                    text="Credits"
-                    key="home.footer.sections.website.credits"
-                    lang={currentLang}
-                />
-            </Button>
-            <Button link={"/donate"}>
-                <LocalizedText
-                    text="Donate"
-                    key="home.footer.sections.donate"
-                    lang={currentLang}
-                />
-            </Button>
-            <Button label="GitHub" link={LINK.github} />
-            <Button link={LINK.wiki}>
-                <LocalizedText
-                    text="Community Wiki"
-                    key="home.footer.sections.community.wiki"
-                    lang={currentLang}
-                />
-            </Button>
-        </div>
     {/if}
         
     {#if isLiveTests && vrIsSupported}
@@ -399,245 +342,6 @@
             </p>
         </div>
     {/if}
-
-    <p style="width: 100%; text-align: center;">
-        <i>
-            <LocalizedText
-                text="Scratch Note: Please don't mention PenguinMod on Scratch, we have different rules compared to Scratch! 😅"
-                key="home.scratchnote"
-                dontlink={true}
-                lang={currentLang}
-            />
-        </i>
-    </p>
-
-    <div class="section-categories">
-        {#if loggedIn !== true}
-            <ContentCategory
-                header={TranslationHandler.text(
-                    "home.sections.whatsnew",
-                    currentLang
-                )}
-                seemore={`https://discord.com/channels/1033551490331197462/1038252360184643674`}
-            >
-                <div class="category-content">
-                    {#if updates.length > 0}
-                        {#each updates as update}
-                            <UserDisplay
-                                link={`https://discord.com/channels/1033551490331197462/1038252360184643674`}
-                                userLink={`https://discord.com/channels/1033551490331197462/1038252360184643674`}
-                                text={update.cleanContent}
-                                author={update.authorName}
-                                image={update.authorImage}
-                            />
-                            <a target="_blank" href={update.image}>
-                                <button class="update-image-wrapper">
-                                    <img
-                                        src={update.image}
-                                        alt="Screenshot"
-                                        class="update-image"
-                                    />
-                                </button>
-                            </a>
-                        {/each}
-                    {:else}
-                        <LoadingSpinner />
-                    {/if}
-                </div>
-            </ContentCategory>
-        {:else}
-            <div class="welcome-back-card">
-                <img
-                    src={`https://trampoline.turbowarp.org/avatars/by-username/${loggedInUsername}`}
-                    alt="Profile"
-                    class="profile-picture"
-                />
-                <h1>
-                    {TranslationHandler.text(
-                        "home.welcome",
-                        currentLang
-                    ).replace('$1', loggedInUsername)}
-                </h1>
-                <div class="welcome-back-row">
-                    <a href={LINK.editor} class="welcome-back-no-underline">
-                        <button class="welcome-back-button">
-                            <div class="welcome-back-icon-container">
-                                <img
-                                    src="/messages/create.svg"
-                                    alt="Create"
-                                    draggable="false"
-                                />
-                            </div>
-                            <LocalizedText
-                                text="Create"
-                                key="navigation.create"
-                                lang={currentLang}
-                            />
-                        </button>
-                    </a>
-                    <a href={`/mystuff`} class="welcome-back-no-underline">
-                        <button class="welcome-back-button">
-                            <div class="welcome-back-icon-container">
-                                <img
-                                    src="/messages/mystuff.svg"
-                                    alt="My Stuff"
-                                    draggable="false"
-                                />
-                            </div>
-                            <LocalizedText
-                                text="My Stuff"
-                                key="navigation.mystuff"
-                                lang={currentLang}
-                            />
-                        </button>
-                    </a>
-                    <a
-                        href={`/profile?user=${loggedInUsername}`}
-                        class="welcome-back-no-underline"
-                    >
-                        <button class="welcome-back-button">
-                            <div class="welcome-back-icon-container">
-                                <img
-                                    src="/messages/profile.svg"
-                                    alt="Profile"
-                                    draggable="false"
-                                />
-                            </div>
-                            <LocalizedText
-                                text="Profile"
-                                key="navigation.profile"
-                                lang={currentLang}
-                            />
-                        </button>
-                    </a>
-                </div>
-            </div>
-        {/if}
-        {#if loggedIn && selectedFrontTabSelected === "feed"}
-            <ContentCategory
-                header={TranslationHandler.text(
-                    "home.sections.feed",
-                    currentLang
-                )}
-            >
-                <div class="category-content">
-                    {#if myFeed.length > 0}
-                        {#each myFeed as message}
-                            {#if message}
-                                <UserDisplay
-                                    link={getFeedUrl(
-                                        message.type,
-                                        message.username,
-                                        message.content
-                                    )}
-                                    userLink={`/profile?user=${message.username}`}
-                                    text={getFeedText(
-                                        message.type,
-                                        message.username,
-                                        message.content
-                                    )}
-                                    author={message.username}
-                                    image={`https://trampoline.turbowarp.org/avatars/by-username/${message.username}`}
-                                />
-                            {/if}
-                        {/each}
-                    {:else if feedIsEmpty}
-                        <PenguinConfusedSVG width="6rem" />
-                        <p>
-                            <LocalizedText
-                                text="Nothing was found."
-                                key="generic.notfound"
-                                lang={currentLang}
-                            />
-                        </p>
-                    {:else}
-                        <LoadingSpinner />
-                    {/if}
-                </div>
-            </ContentCategory>
-        {:else if !loggedIn || selectedFrontTabSelected === "commit"}
-            <ContentCategory
-                header={TranslationHandler.text(
-                    "home.sections.githubcommits",
-                    currentLang
-                )}
-                seemore={LINK.github}
-            >
-                <div class="category-content">
-                    {#if ghcommits.length > 0}
-                        {#each ghcommits as commit}
-                            {#if commit}
-                                <UserDisplay
-                                    link={commit.html_url}
-                                    userLink={commit.author
-                                        ? commit.author.html_url
-                                        : ""}
-                                    text={censor(commit.commit.message)}
-                                    author={commit.author
-                                        ? commit.author.login
-                                        : ""}
-                                    image={commit.author
-                                        ? commit.author.avatar_url
-                                        : ""}
-                                />
-                            {/if}
-                        {/each}
-                    {:else if ghcommitsFailed}
-                        <p>
-                            <LocalizedText
-                                text="Failed to load commits."
-                                key="home.sections.githubcommits.failed.generic"
-                                lang={currentLang}
-                            />
-                        </p>
-                    {:else if ghcommitsLoaded}
-                        <p style="text-align: center;">
-                            <LocalizedText
-                                text="GitHub failed to provide commits. Please try again later."
-                                key="home.sections.githubcommits.failed.provide"
-                                lang={currentLang}
-                            />
-                        </p>
-                    {:else}
-                        <LoadingSpinner />
-                    {/if}
-                </div>
-            </ContentCategory>
-        {:else if loggedIn && selectedFrontTabSelected === "new"}
-            <ContentCategory
-                header={TranslationHandler.text(
-                    "home.sections.whatsnew",
-                    currentLang
-                )}
-                seemore={`https://discord.com/channels/1033551490331197462/1038252360184643674`}
-            >
-                <div class="category-content">
-                    {#if updates.length > 0}
-                        {#each updates as update}
-                            <UserDisplay
-                                link={`https://discord.com/channels/1033551490331197462/1038252360184643674`}
-                                userLink={`https://discord.com/channels/1033551490331197462/1038252360184643674`}
-                                text={update.cleanContent}
-                                author={update.authorName}
-                                image={update.authorImage}
-                            />
-                            <a target="_blank" href={update.image}>
-                                <button class="update-image-wrapper">
-                                    <img
-                                        src={update.image}
-                                        alt="Screenshot"
-                                        class="update-image"
-                                    />
-                                </button>
-                            </a>
-                        {/each}
-                    {:else}
-                        <LoadingSpinner />
-                    {/if}
-                </div>
-            </ContentCategory>
-        {/if}
-    </div>
     {#if loggedIn}
         <div class="section-category-toggles">
             <div class="category-toggle-section" />
@@ -686,91 +390,31 @@
     {/if}
 
     <div class="section-projects">
-        <ContentCategory
-            header={TranslationHandler.text(
-                "home.sections.weeklyfeatured",
-                currentLang
-            )}
-            seemore={`/search?q=featured%3Aprojects`}
-            style="width:65%;"
-            stylec="height: 244px;"
-        >
-            <div class="project-list">
-                {#if projects.featured.length > 0}
-                    {#each projects.featured as project}
-                        <Project {...project} />
-                    {/each}
-                {:else if projectsLoaded === true}
-                    <div
-                        style="display:flex;flex-direction:column;align-items: center;width: 100%;"
-                    >
-                        <PenguinConfusedSVG width="8rem" />
-                        <p>
-                            <LocalizedText
-                                text="Nothing found. You can help feature projects by clicking the yellow checkmark below them."
-                                key="home.none.featured"
-                                lang={currentLang}
-                            />
-                        </p>
-                    </div>
-                {:else if projectsFailed === true}
-                    <div
-                        style="display:flex;flex-direction:column;align-items: center;width: 100%;"
-                    >
-                        <img
-                            src="/penguins/server.svg"
-                            alt="Server Penguin"
-                            style="width: 15rem"
-                        />
-                        <p>
-                            <LocalizedText
-                                text="Whoops! Our server's having some problems. Try again later."
-                                key="home.server.error"
-                                lang={currentLang}
-                            />
-                        </p>
-                    </div>
-                {:else}
-                    <LoadingSpinner />
-                {/if}
-            </div>
-        </ContentCategory>
-        <ContentCategory
-            header={TranslationHandler.text(
-                "home.sections.todaysprojects",
-                currentLang
-            )}
-            seemore={`/search?q=all%3Aprojects`}
-            style="width:65%;"
-            stylec="height: 244px;"
-        >
-            <div class="project-list">
-                {#if projects.today.length > 0}
-                    {#each projects.today as project}
-                        <Project {...project} />
-                    {/each}
-                {:else if projectsFailed === true}
-                    <div
-                        style="display:flex;flex-direction:column;align-items: center;width: 100%;"
-                    >
-                        <img
-                            src="/penguins/server.svg"
-                            alt="Server Penguin"
-                            style="width: 15rem"
-                        />
-                        <p>
-                            <LocalizedText
-                                text="Whoops! Our server's having some problems. Try again later."
-                                key="home.server.error"
-                                lang={currentLang}
-                            />
-                        </p>
-                    </div>
-                {:else}
-                    <LoadingSpinner />
-                {/if}
-            </div>
-        </ContentCategory>
+        <center><h1>What does PenguinMod Premium get you?</h1></center>
+        <center><h3>Verified Profile Badge</h3>
+            <p>Ever wanted to look like a dork- I mean cool person? Verified checkmark allows you to tell everyone you pay $8 per month for PenguinMod!</p>
+        </center>
+        <center><h3>Rainbow Theme</h3>
+            <p>With PenguinMod Premium, you get access to our cutting edge JavaScript code to enable Rainbow theme on PenguinMod! Please don't use ChatGPT to do it yourself.</p>
+        </center>
+        <center><h3>Remove Extension Limit</h3>
+            <p>Since we want money, we are now limiting the amount of extensions you can have in a project to <b>3</b>. With Premium, you can add unlimited!</p>
+        </center>
+        <center><h3>Remove Block Limit</h3>
+            <p>Since we want money, we are now limiting the amount of blocks you can have in a project to <b>20</b>. With Premium, you can add unlimited!</p>
+        </center>
+        <center><h3>Remove Project Limit</h3>
+            <p>Since we want money, we are now limiting the amount of projects you can have on your account to <b>5</b>. With Premium, you can have unlimited!</p>
+        </center>
+        <center><h3>Remove Screen Time Limit</h3>
+            <p>Since we want money, we are now limiting the amount of time you can spend on our website to <b>30 minutes per day</b>. With Premium, you can have unlimited time!</p>
+        </center>
+        <center><h3>Logging in</h3>
+            <p>Since we want money, we are now preventing anyone from logging in or signing up. With Premium, you can log in or signup!</p>
+        </center>
+        <center><h3>Viewing Projects</h3>
+            <p>Since we want money, we are now preventing anyone from viewing projects. With Premium, you can view projects!</p>
+        </center>
     </div>
 
     <div class="footer">

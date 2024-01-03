@@ -175,13 +175,6 @@
 </script>
 
 <div style="display: none;" class="languageSelect" bind:this={languageMenu}>
-	<button
-		class="languageOption"
-		style="margin-bottom: 8px;"
-		on:click={() => chooseLang("default")}
-	>
-		{defaultLanguageText}
-	</button>
 	<p class="languageCount">
 		{defaultLanguageCount.replace("$1", languageKeys.length)}
 	</p>
@@ -242,37 +235,12 @@
 		on:click={switchTheme}
 	/>
 	<div class="only-non-launcher">
-		<BarPage link={LINK.editor}>
-			<LocalizedText
-				text="Create"
-				key="navigation.create"
-				lang={currentLang}
-			/>
-		</BarPage>
 	</div>
 	<div class="only-launcher">
 		<BarPage id="__home_navigation_create_button">
 			<img src="/create.png" alt="Create" />
 		</BarPage>
 	</div>
-	<BarSearch placeholder={searchBar} />
-	<BarButton
-		highlighted="true"
-		link={LINK.discord}
-		noredirect="true"
-		classActor={"discordButton"}
-	>
-		<div class="discord-button-text">
-			<LocalizedText
-				text="Discord"
-				key="navigation.discord"
-				lang={currentLang}
-			/>
-		</div>
-		<div class="discord-button-icon">
-			<img src="/discord_white.png" alt="Discord" />
-		</div>
-	</BarButton>
 	{#if loggedIn === true}
 		<BarPage
 			link="/messages"
@@ -301,30 +269,6 @@
 			label="<img src='/messages/panel.svg' width='25' alt='Panel'>"
 			style="padding:0.5rem"
 		/>
-	{/if}
-	{#if loggedIn === false}
-		<BarPage on:click={login}>
-			<LocalizedText
-				text="Sign in"
-				key="navigation.login"
-				lang={currentLang}
-			/>
-		</BarPage>
-	{:else if loggedIn === true}
-		<!-- svelte-ignore a11y-img-redundant-alt -->
-		<button
-			class="profile-dropdown"
-			bind:this={accountButton}
-			on:click={openAccountMenu}
-		>
-			<img
-				src={`https://trampoline.turbowarp.org/avatars/by-username/${accountUsername}`}
-				alt="Profile Picture"
-				class="profile-picture"
-			/>
-			<p>{accountUsername}</p>
-			<img src="/dropdown-caret.png" style="margin: 0 4px" alt="v" />
-		</button>
 	{/if}
 	<BarPage
 		label="<img src='/globe.svg' alt='LanguageSwitcher'><img src='/dropdown-caret.png' style='margin: 0 4px' alt='v'>"
