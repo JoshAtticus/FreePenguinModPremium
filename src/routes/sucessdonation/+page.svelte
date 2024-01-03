@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { Confetti } from "svelte-confetti";
 
   // Components
   import NavigationBar from "$lib/NavigationBar/NavigationBar.svelte";
