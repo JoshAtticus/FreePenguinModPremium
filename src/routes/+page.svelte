@@ -237,7 +237,7 @@
         imgAlt={":D"}
         hasButton={true}
         buttonText={"Join Giveaway"}
-        buttonHref={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+        buttonHref={"https://g.co/bard/share/88f6a3462a3f"}
     />
     <!-- TODO: re-add this, but only have it appear for new users after they login on a date before the alert -->
     <!-- <Alert
@@ -263,7 +263,7 @@
                 <Button
                     label="<img src='/tryit.svg' width='32px' style='margin-right:8px'></img>"
                     highlighted="true"
-                    link={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+                    link={"https://g.co/bard/share/88f6a3462a3f"}
                 >
                     {#if !thingyActive}
                         Redeem Premium!
@@ -420,12 +420,7 @@
     <div class="footer">
         <p>
             <!-- {#if !thingyActive} -->
-                <LocalizedText
-                    text="PenguinMod is not affiliated with Scratch, TurboWarp, the Scratch Team, or the Scratch Foundation."
-                    key="home.footer.notaffiliated"
-                    dontlink={true}
-                    lang={currentLang}
-                />
+                This site is a joke! Please do not click sketchy links!
             <!-- todo: find a better place to put this that isn't, the legal text -->
             <!-- {:else}
                 EEAAOO EEAAOOEEAAOOEEAAOOEEAAOOEEAAOOEEAAOO EEAAOO
