@@ -237,7 +237,7 @@
         imgAlt={":D"}
         hasButton={true}
         buttonText={"Join Giveaway"}
-        buttonHref={"https://g.co/bard/share/88f6a3462a3f"}
+        buttonHref={"https://seriously.pages.dev"}
     />
     <!-- TODO: re-add this, but only have it appear for new users after they login on a date before the alert -->
     <!-- <Alert
@@ -263,7 +263,7 @@
                 <Button
                     label="<img src='/tryit.svg' width='32px' style='margin-right:8px'></img>"
                     highlighted="true"
-                    link={"https://g.co/bard/share/88f6a3462a3f"}
+                    link={"https://seriously.pages.dev"}
                 >
                     {#if !thingyActive}
                         Redeem Premium!
